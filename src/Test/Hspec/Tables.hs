@@ -13,6 +13,7 @@
 -- Table-driven (by example) HSpec tests
 module Test.Hspec.Tables
   ( byExample,
+    testTable,
   )
 where
 
@@ -46,3 +47,12 @@ byExample ::
   SpecWith (Arg a)
 byExample header table test =
   describe (showHeader @r header) $ mapM_ (\row -> specify @a (show row) $ apply test row) table
+
+testTable ::
+  forall a r.
+  (Table r, Example a, Show r) =>
+  Header r ->
+  [r] ->
+  Forall r a ->
+  SpecWith (Arg a)
+testTable = byExample @a
