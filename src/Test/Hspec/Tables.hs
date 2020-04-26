@@ -35,7 +35,8 @@
 -- >    [("abc", "cba"), ("", ""), ("0123456", "6543210")]
 -- >    (shouldBe . reverse)
 module Test.Hspec.Tables
-  ( byExample,
+  ( Table (..),
+    byExample,
     testTable,
   )
 where
