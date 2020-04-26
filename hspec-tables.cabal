@@ -52,6 +52,7 @@ test-suite hspec-tables-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Spec.hs
+  other-modules:       ExampleSpecs
   build-depends:       hspec-tables,
                        hspec ==2.7.*
   ghc-options:         -threaded

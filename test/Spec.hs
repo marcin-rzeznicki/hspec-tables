@@ -4,13 +4,16 @@
 import Control.Monad (join)
 import Data.Foldable
 import Data.Functor ((<&>))
+import ExampleSpecs
 import Test.Hspec
 import Test.Hspec.Core.Runner (ColorMode (..), Config (..), Summary (..), defaultConfig, runSpec)
 import Test.Hspec.Core.Spec (Item (..), runSpecM)
 import Test.Hspec.Tables
 
 main :: IO ()
-main = hspec spec
+main = hspec $ do
+  spec
+  exampleSpecs
 
 spec :: Spec
 spec = forM_ [spec2Bool, spec2BoolF, spec2Expectation, spec3, spec4, spec5, spec6, spec7] specMetaSpec
