@@ -13,7 +13,7 @@ main :: IO ()
 main = hspec spec
 
 spec :: Spec
-spec = forM_ [spec2Bool, spec2BoolF, spec2Expectation, spec3] specMetaSpec
+spec = forM_ [spec2Bool, spec2BoolF, spec2Expectation, spec3, spec4, spec5, spec6, spec7] specMetaSpec
 
 data MetaSpec b = forall a. Show a => MetaSpec {label :: String, def :: [a], thisSpec :: SpecWith b, expectedFailures :: Int}
 
@@ -36,6 +36,18 @@ spec2Expectation = describeMeta "spec2Expectation" [(0, 0), (1, 2), (2, 4), (3, 
 
 spec3 :: MetaSpec ()
 spec3 = describeMeta "spec3" [(0, 0, 0), (1, 1, 2), (2, 2, 4), (3, 3, 6), (4, 4, 8), (5, 5, 10)] $ \examples -> byExample ("A", "B", "expected") examples (\a b expected -> a + b == expected)
+
+spec4 :: MetaSpec ()
+spec4 = describeMeta "spec4" [('a', 'b', 'c', "abc"), ('g', 'e', 'f', "gef"), ('x', 'y', 'z', "xyz")] $ \examples -> byExample ("A", "B", "C", "expected") examples (\a b c expected -> [a, b, c] `shouldBe` expected)
+
+spec5 :: MetaSpec ()
+spec5 = describeMeta "spec5" [('a', 'b', 'c', 'd', "abcd"), ('g', 'e', 'f', 'h', "gefh"), ('x', 'y', 'z', 'a', "xyza")] $ \examples -> byExample ("A", "B", "C", "D", "expected") examples (\a b c d expected -> [a, b, c, d] `shouldBe` expected)
+
+spec6 :: MetaSpec ()
+spec6 = describeMeta "spec6" [(1, 1, 1, 1, 1, 1), (2, 2, 2, 2, 2, 32)] $ \examples -> byExample ("A", "B", "C", "D", "E", "expected") examples (\a b c d e expected -> a * b * c * d * e == expected)
+
+spec7 :: MetaSpec ()
+spec7 = describeMeta "spec7" [(1, 1, 1, 1, 1, 1, 1), (2, 2, 2, 2, 2, 2, 64)] $ \examples -> byExample ("A", "B", "C", "D", "E", "F", "expected") examples (\a b c d e f expected -> a * b * c * d * e * f == expected)
 
 _config :: Config
 _config = defaultConfig {configIgnoreConfigFile = True, configColorMode = ColorNever}

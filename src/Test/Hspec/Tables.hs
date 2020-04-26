@@ -38,6 +38,26 @@ instance Table (a, b, c) where
   type Forall (a, b, c) p = a -> b -> c -> p
   apply f (a, b, c) = f a b c
 
+instance Table (a, b, c, d) where
+  type Header (a, b, c, d) = (String, String, String, String)
+  type Forall (a, b, c, d) p = a -> b -> c -> d -> p
+  apply f (a, b, c, d) = f a b c d
+
+instance Table (a, b, c, d, e) where
+  type Header (a, b, c, d, e) = (String, String, String, String, String)
+  type Forall (a, b, c, d, e) p = a -> b -> c -> d -> e -> p
+  apply f (a, b, c, d, e) = f a b c d e
+
+instance Table (a, b, c, d, e, f) where
+  type Header (a, b, c, d, e, f) = (String, String, String, String, String, String)
+  type Forall (a, b, c, d, e, f) p = a -> b -> c -> d -> e -> f -> p
+  apply f (a, b, c, d, e, f_) = f a b c d e f_
+
+instance Table (a, b, c, d, e, f, g) where
+  type Header (a, b, c, d, e, f, g) = (String, String, String, String, String, String, String)
+  type Forall (a, b, c, d, e, f, g) p = a -> b -> c -> d -> e -> f -> g -> p
+  apply f (a, b, c, d, e, f_, g) = f a b c d e f_ g
+
 byExample ::
   forall a r.
   (Table r, Example a, Show r) =>
