@@ -10,7 +10,30 @@
 -- SPDX-License-Identifier: MIT
 -- Maintainer: Marcin Rzeźnicki <marcin.rzeznicki@gmail.com>
 --
--- Table-driven (by example) HSpec tests
+-- Table-driven (by example) HSpec tests.
+--
+-- Example usage:
+--
+-- > describe "multiplication table" $
+-- >  byExample
+-- >    ("x", "y", "result")
+-- >    [ (0, 0, 0),
+-- >      (0, 1, 0),
+-- >      (0, 2, 0),
+-- >      (1, 0, 0),
+-- >      (1, 1, 1),
+-- >      (1, 2, 2),
+-- >      (2, 0, 0),
+-- >      (2, 1, 2),
+-- >      (2, 2, 4)
+-- >    ]
+-- >    (\a b expected -> a * b == expected)
+--
+-- > describe "reverse" $
+-- >  byExample
+-- >    ("list", "reversed")
+-- >    [("abc", "cba"), ("", ""), ("0123456", "6543210")]
+-- >    (shouldBe . reverse)
 module Test.Hspec.Tables
   ( byExample,
     testTable,
@@ -58,16 +81,40 @@ instance Table (a, b, c, d, e, f, g) where
   type Forall (a, b, c, d, e, f, g) p = a -> b -> c -> d -> e -> f -> g -> p
   apply f (a, b, c, d, e, f_, g) = f a b c d e f_ g
 
+-- | Creates a 'Spec' from the /table/ consisting of:
+--
+--    * header
+--    * list of examples (/rows/)
+--    * assertion
+--
+--  The resulting spec consists of one test per each /row/.
+--  For example:
+--
+--  > byExample
+--  >   ("list", "reversed")
+--  >   [("abc", "cba"), ("", ""), ("0123456", "6543210")]
+--  >  (shouldBe . reverse)
+--
+--  is equivalent to:
+--
+--  > describe (show ("list", "reversed")) $ do
+--  >   specify (show ("abc", "cba")) $ reverse "abc" `shouldBe` "cba"
+--  >   specify (show ("", "")) $ reverse "" `shouldBe` ""
+--  >   specify (show ("0123456", "6543210")) $ reverse "0123456" `shouldBe` "6543210"
 byExample ::
   forall a r.
   (Table r, Example a, Show r) =>
+  -- | /header/ - tuple of strings (max 7 for now); used to 'describe' this spec, its arity == number of columns
   Header r ->
+  -- | /rows/ - list of tuples of examples; arity of each tuple must match the number of columns (== arity of the /header/)
   [r] ->
+  -- | /assertion/ - curried function from a row to an 'a' - if /row/ is @(b,c,d)@ then it must be @('Example' a) => b -> c -> d -> a@
   Forall r a ->
   SpecWith (Arg a)
 byExample header table test =
   describe (showHeader @r header) $ mapM_ (\row -> specify @a (show row) $ apply test row) table
 
+-- | Alias for 'byExample'
 testTable ::
   forall a r.
   (Table r, Example a, Show r) =>
