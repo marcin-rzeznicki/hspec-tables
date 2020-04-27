@@ -4,6 +4,7 @@
 [![Stackage Lts](http://stackage.org/package/hspec-tables/badge/lts)](http://stackage.org/lts/package/hspec-tables)
 [![Stackage Nightly](http://stackage.org/package/hspec-tables/badge/nightly)](http://stackage.org/nightly/package/hspec-tables)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Build Status](https://travis-ci.com/marcin-rzeznicki/hspec-tables.svg?branch=master)](https://travis-ci.com/marcin-rzeznicki/hspec-tables)
 
 `Test.Hspec.Tables` allows you to define table-driven (or, _by-example_) [HSpec](https://hspec.github.io/) tests. For example:
 
