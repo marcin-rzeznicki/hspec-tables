@@ -43,6 +43,9 @@ where
 
 import Test.Hspec.Core.Spec
 
+-- | A type class for tables.
+--
+-- A table type binds together the row type @r@ with the type of its header and the "generic" curried function @forall p. r -> p@
 class Table r where
   type Header r
   type Forall r p
@@ -109,7 +112,7 @@ byExample ::
   Header r ->
   -- | /rows/ - list of tuples of examples; arity of each tuple must match the number of columns (== arity of the /header/)
   [r] ->
-  -- | /assertion/ - curried function from a row to an 'a' - if /row/ is @(b,c,d)@ then it must be @('Example' a) => b -> c -> d -> a@
+  -- | /assertion/ - curried function from a row to an @a@ - if /row/ type is @(b,c,d)@ then it must be @('Example' a) => b -> c -> d -> a@
   Forall r a ->
   SpecWith (Arg a)
 byExample header table test =
