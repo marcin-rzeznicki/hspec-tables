@@ -92,8 +92,7 @@ error:
 
 ```
 
-The assertion function will match the table type, so if your table is of shape `(a, b, c)` then the assertion is assumed to be of type `(Example e) => a -> b -> c -> e` (ie. it's always curried). [Example](https://hackage.haskell.org/package/hspec/docs/Test-Hspec.html#t:Example
-) comes from `HSpec`
+The assertion function will match the table type, so if your table is of shape `(a, b, c)` then the assertion is assumed to be of type `(Example e) => a -> b -> c -> e` (ie. it's always curried). [Example](https://hackage.haskell.org/package/hspec/docs/Test-Hspec.html#t:Example) comes from `HSpec`
 
 ## Caveats
 
