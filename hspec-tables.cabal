@@ -25,6 +25,7 @@ common common-options
                        hspec-core ==2.7.*
   
   ghc-options:         -Wall
+                       -Wno-type-defaults
                        -Wcompat
                        -Widentities
                        -Wincomplete-uni-patterns
