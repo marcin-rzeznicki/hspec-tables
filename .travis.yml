@@ -34,12 +34,12 @@ before_install:
 - stack --version
 # GHC
 - travis_wait stack --no-terminal setup
-- stack exec -- ghc --version
+- stack --skip-ghc-check exec -- ghc --version
 
 install:
 # Build dependencies
-- stack --no-terminal test --only-dependencies
+- stack --no-terminal --skip-ghc-check test --only-dependencies
 
 script:
 # Build the package, its tests, and its docs and run the tests
-- stack --no-terminal test --haddock --no-haddock-deps
+- stack --no-terminal --skip-ghc-check test --haddock --no-haddock-deps
