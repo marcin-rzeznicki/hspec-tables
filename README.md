@@ -5,7 +5,7 @@
 [![Stackage Nightly](http://stackage.org/package/hspec-tables/badge/nightly)](http://stackage.org/nightly/package/hspec-tables)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-`Test.Hspec.Tables` allows you to define table-driven (or, _by example_) [HSpec](https://hspec.github.io/) tests. For example:
+`Test.Hspec.Tables` allows you to define table-driven (or, _by-example_) [HSpec](https://hspec.github.io/) tests. For example:
 
 ```haskell
 import Test.Hspec

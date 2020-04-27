@@ -1,8 +1,8 @@
 cabal-version:       2.4
 name:                hspec-tables
 version:             0.0.1
-synopsis:            Table-driven (by example) HSpec tests
-description:         Table-driven (by example) HSpec tests
+synopsis:            Table-driven (by-example) HSpec tests
+description:         Table-driven (by-example) HSpec tests
 homepage:            https://github.com/marcin-rzeznicki/hspec-tables
 bug-reports:         https://github.com/marcin-rzeznicki/hspec-tables/issues
 license:             MIT

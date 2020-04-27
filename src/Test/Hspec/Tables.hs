@@ -10,7 +10,7 @@
 -- SPDX-License-Identifier: MIT
 -- Maintainer: Marcin Rzeźnicki <marcin.rzeznicki@gmail.com>
 --
--- Table-driven (by example) HSpec tests.
+-- Table-driven (by-example) HSpec tests.
 --
 -- Example usage:
 --
