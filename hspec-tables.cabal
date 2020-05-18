@@ -22,7 +22,7 @@ source-repository head
   location:            https://github.com/marcin-rzeznicki/hspec-tables.git
 
 common common-options
-  build-depends:       base ^>= 4.13.0.0,
+  build-depends:       base >= 4.13.0.0 && < 4.15,
                        hspec-core ==2.7.*
   
   ghc-options:         -Wall
