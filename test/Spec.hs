@@ -3,7 +3,6 @@
 
 import Control.Monad (join)
 import Data.Foldable
-import Data.Functor ((<&>))
 import ExampleSpecs
 import Test.Hspec
 import Test.Hspec.Core.Runner (ColorMode (..), Config (..), Summary (..), defaultConfig, runSpec)
@@ -88,7 +87,7 @@ specMetaSpec MetaSpec {..} = describe label $ do
   specify "Execution" $ runSpec thisSpec _config `shouldReturn` expectedSummary
 
 expectCorrectSpec :: Show a => [a] -> SpecWith b -> Expectation
-expectCorrectSpec def generatedSpec = runSpecM generatedSpec <&> getAllItems >>= (shouldMatchList labels . itemRequirements)
+expectCorrectSpec def generatedSpec = runSpecM generatedSpec >>= (shouldMatchList labels . itemRequirements) . getAllItems
   where
     itemRequirements = map itemRequirement
     getAllItems = join . map toList
